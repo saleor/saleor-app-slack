@@ -15,7 +15,7 @@ import { createClient } from "../../lib/graphql";
 import { apl } from "../../lib/saleorApp";
 import { getAppIdFromApi } from "../../lib/utils";
 
-const CONFIGURATION_KEYS = ["NUMBER_OF_ORDERS"];
+const CONFIGURATION_KEYS = ["WEBHOOK_URL"];
 
 const prepareMetadataFromRequest = (input: MetadataInput[] | MetadataItem[]) =>
   input

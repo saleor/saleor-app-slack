@@ -1,32 +1,17 @@
-# Saleor App Template
+# Saleor App Slack
 
-Bare-bones boilerplate for writing Saleor Apps with Next.js.
+Saleor application to send Slack messages based on `order_created` events.
 
-### What's Saleor App in a nutshell
-
-Saleor App is the fastest way of extending Saleor with custom logic using [asynchronous](https://docs.saleor.io/docs/3.x/developer/extending/apps/asynchronous-webhooks) and [synchronous](https://docs.saleor.io/docs/3.x/developer/extending/apps/synchronous-webhooks) webhooks (and vast Saleor's API). In most cases, creating an App consists of two tasks:
-
-- Writing webhook's code realizing your custom logic
-- Developing configuration UI that can be exposed to Saleor Dashboard via specialized view (designated in App's manifest).
+![](docs/images/readme.jpg)
 
 ### What's included?
 
-- 🚀 Communication between Saleor instance and Saleor App
-- ⚙️ Encapsulated Metadata and Private Metadata handling logic
-- 📱 Configuration UI
-- ⚡ Example of Webhook handling
-- 🧭 Example of using App Extension
-- 📖 Manifest with webhooks using custom query
+- Connection between Saleor and Slack using webhook
+- Example `order_created` webhook that triggers Slack bot to send message
 
-### Why Next.js
+### The stack
 
-You can use any preferred technology to create Saleor Apps, but Next.js is among the most efficient for two reasons. The first is the simplicity of maintaining your API endpoints/webhooks and your apps' configuration React front-end in a single, well-organized project. The second reason is the ease and quality of local development and deployment.
-
-### Learn more about Apps
-
-[Apps guide](https://docs.saleor.io/docs/3.x/developer/extending/apps/key-concepts)
-
-[Configuring apps in dashboard](https://docs.saleor.io/docs/3.x/dashboard/apps)
+Slack app is based on App Template - you can check it [here](https://github.com/saleor/saleor-app-template)
 
 ## How to use this project
 
@@ -90,8 +75,18 @@ If you use [saleor-dashboard](https://github.com/saleor/saleor-dashboard) and yo
 [YOUR_SALEOR_DASHBOARD_URL]/apps/install?manifestUrl=[YOUR_APPS_MANIFEST_URL]
 ```
 
+### Connecting your application to Slack
+
+Read how to connect the app with the Slack [here](./docs/setup-slack-app.md)
+
 ### Generated schema and typings
 
 Commands `build` and `dev` would generate schema and typed functions using Saleor's GraphQL endpoint. Commit `generated` folder to your repo as they are necessary for queries and keeping track of the schema changes.
 
 [Learn more](https://www.graphql-code-generator.com/) about GraphQL code generation.
+
+### Learn more about Saleor Apps
+
+[Apps guide](https://docs.saleor.io/docs/3.x/developer/extending/apps/key-concepts)
+
+[Configuring apps in dashboard](https://docs.saleor.io/docs/3.x/dashboard/apps)
