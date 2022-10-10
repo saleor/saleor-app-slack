@@ -15,9 +15,9 @@
     "schemaVersion": "3.4"
   },
   "saleorApp": {
-    "name": "My Saleor App",
+    "name": "Slack",
     "logo": "/public/logo.png",
-    "shortDescription": "Bare-bones boilerplate for writing Saleor Apps with Next.js & MacawUI",
+    "shortDescription": "Connect Saleor and Slack together",
     "sourceUrl": "https://github.com/",
     "vendor": "Saleor Commerce",
     "links": [
@@ -34,7 +34,7 @@
         "href": "https://saleor.io/legal/privacy/"
       }
     ],
-    "description": "Saleor App is the fastest way of extending Saleor with custom logic using asynchronous and synchronous webhooks (and vast Saleor's API).",
+    "description": "Slack is a new way to communicate with your team. It's faster, better organized, and more secure than email.",
     "images": [
       "/public/image.png"
     ]
