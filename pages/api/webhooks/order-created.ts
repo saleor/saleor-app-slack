@@ -11,10 +11,11 @@ import { Response } from "retes/response";
 
 import { getValue } from "../../../lib/metadata";
 import { apl } from "../../../lib/saleorApp";
+import { sendSlackMessage } from "../../../lib/slack";
 
 const handler: Handler = async (request) => {
-  const saleorDomain = request.headers[SALEOR_DOMAIN_HEADER];
-  const webhookUrl = await getValue(saleorDomain as string, "WEBHOOK_URL");
+  const saleorDomain = request.headers[SALEOR_DOMAIN_HEADER] as string;
+  const webhookUrl = await getValue(saleorDomain, "WEBHOOK_URL");
 
   const context = request.params;
   const {
@@ -25,27 +26,15 @@ const handler: Handler = async (request) => {
     return Response.BadRequest({ success: false, message: "No order id." });
   }
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `New order created for ${userEmail} 🎉\n\n<https://${saleorDomain}/dashboard/orders/${id}|View order>`,
-          },
-        },
-      ],
-    }),
-  });
+  const response = await sendSlackMessage(webhookUrl, { userEmail, saleorDomain, orderId: id });
 
   if (response.status !== 200) {
+    const errorMessage = await response.text();
+    console.error(`Slack API responded with code ${response.status}: ${errorMessage}`);
+
     return Response.InternalServerError({
-      success: true,
-      message: `Slack API responded with status ${
-        response.status
-      }. Message: ${await response.text()}`,
+      success: false,
+      message: `Slack API responded with status ${response.status}. Message: ${errorMessage}`,
     });
   }
 
