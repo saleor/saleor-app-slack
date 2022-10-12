@@ -133,6 +133,18 @@ function Instructions() {
   slackUrl.searchParams.append("new_app", "1");
   slackUrl.searchParams.append("manifest_json", JSON.stringify(data));
 
+  const openExternalUrl = (to: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    appBridge?.dispatch({
+      type: "redirect",
+      payload: {
+        newContext: true,
+        actionId: "redirect_from_klaviyo_app",
+        to,
+      },
+    });
+  };
+
   return (
     <>
       <Typography>How to configure</Typography>
@@ -141,15 +153,7 @@ function Instructions() {
           <a
             onClick={(e) => {
               e.preventDefault();
-              // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              appBridge?.dispatch({
-                type: "redirect",
-                payload: {
-                  newContext: true,
-                  actionId: "redirect_from_slack_app",
-                  to: slackUrl.href,
-                },
-              });
+              openExternalUrl(slackUrl.href);
             }}
             href={slackUrl.href}
           >
@@ -161,6 +165,31 @@ function Instructions() {
           `WEBHOOK_URL` field
         </ListItem>
         <ListItem>Save configuration</ListItem>
+      </List>
+      <Typography>Useful links</Typography>
+      <List>
+        <ListItem>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl("https://github.com/saleor/saleor-app-slack");
+            }}
+            href="https://github.com/saleor/saleor-app-slack"
+          >
+            Visit repository & readme
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl("https://api.slack.com/messaging/webhooks");
+            }}
+            href="https://api.slack.com/messaging/webhooks"
+          >
+            Read about Slack apps that use incoming webhooks
+          </a>
+        </ListItem>
       </List>
     </>
   );
