@@ -139,7 +139,7 @@ function Instructions() {
       type: "redirect",
       payload: {
         newContext: true,
-        actionId: "redirect_from_klaviyo_app",
+        actionId: "redirect_from_slack_app",
         to,
       },
     });
