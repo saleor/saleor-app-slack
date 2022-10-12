@@ -18,15 +18,16 @@ const handler: Handler = async (request) => {
   const webhookUrl = await getValue(saleorDomain, "WEBHOOK_URL");
 
   const context = request.params;
-  const {
-    order: { id, userEmail },
-  } = context;
+  const { order } = context;
 
-  if (!id) {
+  if (!order.id) {
     return Response.BadRequest({ success: false, message: "No order id." });
   }
 
-  const response = await sendSlackMessage(webhookUrl, { userEmail, saleorDomain, orderId: id });
+  const response = await sendSlackMessage(webhookUrl, {
+    saleorDomain,
+    order,
+  });
 
   if (response.status !== 200) {
     const errorMessage = await response.text();
