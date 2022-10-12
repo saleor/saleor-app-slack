@@ -6,37 +6,33 @@ Use [readme](./../README.md) to get started
 
 ## Create new Slack application
 
-Go to Slack API [page](https://api.slack.com/apps?new_app=1) and select create app from scratch:
+Click `Install Slack application` link on main view of Saleor App Slack in your Saleor Dashboard
 
-![](images/slack-app-create.jpg)
+![](images/install-slack.jpg)
 
-Save your app name as `Saleor` and choose your [workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace) then click `Create App`
+Follow instructions in Slack - select your workspace
 
-![](images/slack-app-name.jpg)
+![](images/slack-workspace.jpg)
 
-On the next screen select `Incoming Webhooks` feature
+On the next modal review app & click `Create`
 
-![](images/slack-app-webhooks.jpg)
+![](images/slack-permissions.jpg)
 
-Activate `Incoming Webhooks`
+It is time to install application in your workspace - follow Slack instructions
 
-![](images/slack-app-webhooks-activate.jpg)
-
-You should see new section just under `Activate Incoming Webhooks` - click `Add New Webhook to Workspace`
-
-![](images/slack-app-webhooks-section.jpg)
+![](images/slack-workspace-button.jpg)
 
 You will get redirected to new page where you can select channel that will receive Saleor messages. Select one and click `Allow`
 
-![](images/slack-app-webook-channel.jpg)
+![](images/slack-webook-channel.jpg)
 
-You should return to previous `Incoming Webhooks` page with success message - scroll down to `Webhook URLs for Your Workspace` where you can find new section with `Webhook URL`. Click `Copy` button to copy URL to your clipboard.
+You should return to previous `Basic information` page. Find `Incoming Webhooks` page under `Features` section. Inside this page you will find `Webhook URLs for Your Workspace` where you can find `Webhook URL`. Click `Copy` button to copy URL to your clipboard.
 
-![](images/slack-app-webhook-copy.jpg)
+![](images/slack-webhook-copy.jpg)
 
 Take this copied URL and paste it inside Saleor App configuration in Saleor Dashboard
 
-![](images/readme.jpg)
+![](images/dashboard-config.jpg)
 
 Right now you can create an order e.g using Saleor Dashboard to see message in your selected Slack channel
 

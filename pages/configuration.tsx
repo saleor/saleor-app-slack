@@ -1,4 +1,12 @@
-import { Card, CardContent, CardHeader, TextField } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  List,
+  ListItem,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useAppBridge } from "@saleor/app-sdk/app-bridge";
 import { SALEOR_AUTHORIZATION_BEARER_HEADER, SALEOR_DOMAIN_HEADER } from "@saleor/app-sdk/const";
@@ -114,11 +122,92 @@ function Configuration() {
   );
 }
 
+function Instructions() {
+  const { appBridge } = useAppBridge();
+
+  const { data } = useAppApi({
+    url: "/api/slack-app-manifest",
+  });
+
+  const slackUrl = new URL("https://api.slack.com/apps");
+  slackUrl.searchParams.append("new_app", "1");
+  slackUrl.searchParams.append("manifest_json", JSON.stringify(data));
+
+  const openExternalUrl = (to: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    appBridge?.dispatch({
+      type: "redirect",
+      payload: {
+        newContext: true,
+        actionId: "redirect_from_slack_app",
+        to,
+      },
+    });
+  };
+
+  return (
+    <>
+      <Typography>How to configure</Typography>
+      <List>
+        <ListItem>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl(slackUrl.href);
+            }}
+            href={slackUrl.href}
+          >
+            Install Slack application
+          </a>
+        </ListItem>
+        <ListItem>
+          Copy incoming Webhook URL from Slack app configuration and paste it below into
+          `WEBHOOK_URL` field
+        </ListItem>
+        <ListItem>Save configuration</ListItem>
+      </List>
+      <Typography>Useful links</Typography>
+      <List>
+        <ListItem>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl("https://github.com/saleor/saleor-app-slack");
+            }}
+            href="https://github.com/saleor/saleor-app-slack"
+          >
+            Visit repository & readme
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl("https://api.slack.com/messaging/webhooks");
+            }}
+            href="https://api.slack.com/messaging/webhooks"
+          >
+            Read about Slack apps that use incoming webhooks
+          </a>
+        </ListItem>
+      </List>
+    </>
+  );
+}
+
 Configuration.getLayout = (page: ReactElement) => (
-  <Card>
-    <CardHeader title="Configuration" />
-    <CardContent>{page}</CardContent>
-  </Card>
+  <div>
+    <Card style={{ marginBottom: 40 }}>
+      <CardHeader title="Instructions" />
+      <CardContent>
+        <Instructions />
+      </CardContent>
+    </Card>
+    <Card>
+      <CardHeader title="Configuration" />
+      <CardContent>{page}</CardContent>
+    </Card>
+  </div>
 );
 
 export default Configuration;
