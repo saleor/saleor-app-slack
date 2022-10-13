@@ -3,7 +3,38 @@ subscription OrderCreatedSubscription {
     ... on OrderCreated {
       order {
         id
-        userEmail
+        number
+        user {
+          email
+          firstName
+          lastName
+        }
+        shippingAddress {
+          streetAddress1
+          city
+          postalCode
+          country {
+            country
+          }
+        }
+        subtotal {
+          gross {
+            amount
+            currency
+          }
+        }
+        shippingPrice {
+          gross {
+            amount
+            currency
+          }
+        }
+        total {
+          gross {
+            amount
+            currency
+          }
+        }
       }
     }
   }
