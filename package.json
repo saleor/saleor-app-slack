@@ -14,36 +14,11 @@
   "saleor": {
     "schemaVersion": "3.4"
   },
-  "saleorApp": {
-    "name": "Slack",
-    "logo": "/public/logo.png",
-    "shortDescription": "Connect Saleor and Slack together",
-    "sourceUrl": "https://github.com/",
-    "vendor": "Saleor Commerce",
-    "links": [
-      {
-        "type": "developerWebsite",
-        "href": "https://saleor.io/"
-      },
-      {
-        "type": "mailContact",
-        "href": "mailto:info@saleor.io"
-      },
-      {
-        "type": "privacyPolicy",
-        "href": "https://saleor.io/legal/privacy/"
-      }
-    ],
-    "description": "Slack is a new way to communicate with your team. It's faster, better organized, and more secure than email.",
-    "images": [
-      "/public/image.png"
-    ]
-  },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "4.0.0-alpha.61",
-    "@saleor/app-sdk": "0.11.0",
+    "@saleor/app-sdk": "0.13.2",
     "@saleor/macaw-ui": "^0.6.3",
     "@sentry/nextjs": "^7.12.1",
     "@urql/exchange-auth": "^1.0.0",

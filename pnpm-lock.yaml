@@ -12,7 +12,7 @@ specifiers:
   '@material-ui/core': ^4.12.4
   '@material-ui/icons': ^4.11.3
   '@material-ui/lab': 4.0.0-alpha.61
-  '@saleor/app-sdk': 0.11.0
+  '@saleor/app-sdk': 0.13.2
   '@saleor/macaw-ui': ^0.6.3
   '@sentry/nextjs': ^7.12.1
   '@types/node': ^18.7.16
@@ -52,7 +52,7 @@ dependencies:
   '@material-ui/core': 4.12.4_nylzxt5ale4dsv666zkb25cgtm
   '@material-ui/icons': 4.11.3_syzufrrnbgjhwvvotesawp6yai
   '@material-ui/lab': 4.0.0-alpha.61_syzufrrnbgjhwvvotesawp6yai
-  '@saleor/app-sdk': 0.11.0_biqbaboplfbrettd7655fr4n2y
+  '@saleor/app-sdk': 0.13.2_c3hne4hwj64hb7tofigd3bvkji
   '@saleor/macaw-ui': 0.6.3_3igskpsgnvdgn574z3phvz2joa
   '@sentry/nextjs': 7.12.1_next@12.3.0+react@18.2.0
   '@urql/exchange-auth': 1.0.0_graphql@16.5.0
@@ -1731,9 +1731,10 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /@saleor/app-sdk/0.11.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-nQe2Gb0z9iuLJg23AaXxNC6dxiCOafN3mNtS3DlChPv87pEoFU3ZRewRvqloL2rZpc2z0lfPaNNaDFNvkMLvHQ==}
+  /@saleor/app-sdk/0.13.2_c3hne4hwj64hb7tofigd3bvkji:
+    resolution: {integrity: sha512-OqKlWZiWSEx9e1AdTGfZ0zSWLndoiALJ74o6pHgur/m5EBjP6Bmwi/8HoG2pOr8MhgwoECs+WwKEOzwt7theHQ==}
     peerDependencies:
+      next: ^12
       react: '>=17'
       react-dom: '>=17'
     dependencies:
@@ -1741,10 +1742,11 @@ packages:
       fast-glob: 3.2.11
       graphql: 16.6.0
       jose: 4.9.2
+      next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       node-fetch: 3.2.10
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      retes: 0.32.0
+      retes: 0.33.0
       uuid: 8.3.2
     transitivePeerDependencies:
       - supports-color
@@ -6265,12 +6267,6 @@ packages:
   /ret/0.1.15:
     resolution: {integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==}
     engines: {node: '>=0.12'}
-    dev: false
-
-  /retes/0.32.0:
-    resolution: {integrity: sha512-pCz9SdztBaU4QMX/YA3A5tfEVgHdLwGdc7hJOJHF+XTJzHJksiwQTquZuz32DeJ4KRgo2P8h5sdPnyi+v4AzwQ==}
-    dependencies:
-      busboy: 1.6.0
     dev: false
 
   /retes/0.33.0:
