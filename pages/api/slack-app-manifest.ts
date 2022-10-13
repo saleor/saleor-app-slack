@@ -8,7 +8,7 @@ const handler: Handler = () => {
   const manifest = {
     display_information: {
       name: "Saleor",
-      description: "Receive new orders to your Slack channel",
+      description: "Receive notifications to your Slack channel",
       background_color: "#231e49",
     },
     features: {
