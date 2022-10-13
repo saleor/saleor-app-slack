@@ -7,11 +7,13 @@ import { Response } from "retes/response";
 const handler: Handler = () => {
   const manifest = {
     display_information: {
-      name: "Saleor bot",
+      name: "Saleor",
+      description: "Receive new orders to your Slack channel",
+      background_color: "#231e49",
     },
     features: {
       bot_user: {
-        display_name: "Saleor bot",
+        display_name: "Saleor",
         always_online: false,
       },
     },
