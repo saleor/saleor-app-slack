@@ -15,6 +15,10 @@ Slack app is based on App Template - you can check it [here](https://github.com/
 
 ## How to use this project
 
+### Create Upstash account
+
+You need [Upstash](https://upstash.com/) to run this application locally. Follow [How to configure Upstash for local development](docs/upstash.md) for more info.
+
 ### Saleor CLI for the win 🚀
 
 [Saleor CLI](https://github.com/saleor/saleor-cli) is designed to save you from the repetitive chores around Saleor development, including creating Apps. It will take the burden of spawning new apps locally, connecting them with Saleor environments, and establishing a tunnel for local development in seconds.
