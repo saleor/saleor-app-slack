@@ -32,8 +32,16 @@ const handler = createManifestHandler({
       ],
     };
 
-    return manifest;
-  },
-});
+  const manifest = {
+    id: "saleor.app",
+    version: packageJson.version,
+    name: packageJson.name,
+    permissions: [],
+    appUrl: baseURL,
+    tokenTargetUrl: `${baseURL}/api/register`,
+    webhooks,
+    extensions: [],
+  };
 
 export default withSentry(handler);
+ 
