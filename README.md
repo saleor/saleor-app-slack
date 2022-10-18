@@ -15,9 +15,13 @@ Slack app is based on App Template - you can check it [here](https://github.com/
 
 ## How to use this project
 
-### Create Upstash account
+### Select your APL
 
-You need [Upstash](https://upstash.com/) to run this application locally. Follow [How to configure Upstash for local development](docs/upstash.md) for more info.
+If you want to develop single tenant application - use already configured `FileAPL` for local development.
+
+If you need to support multiple tenants application or you want to deploy your application - use `UpstashAPL`. Follow [How to configure Upstash](docs/upstash.md) for more info.
+
+To read more about storing auth data, read the [APL documentation](https://github.com/saleor/saleor-app-sdk/blob/main/docs/apl.md)
 
 ### Saleor CLI for the win 🚀
 
@@ -31,21 +35,13 @@ If you don't have (free developer) Saleor Cloud account create one with the foll
 saleor register
 ```
 
-Now you're ready to create your first App:
+Now you're ready to run this application in development mode:
 
 ```
-saleor app create [your-app-name]
+pnpm run dev
 ```
 
-In this step, Saleor CLI will:
-
-- clone this repository to the specified folder
-- install dependencies
-- ask you whether you'd like to install the app in the selected Saleor environment
-- create `.env` file
-- start the app in development mode
-
-Having your app ready, the final thing you want to establish is a tunnel with your Saleor environment. Go to your app's directory first and run:
+Having your app running, the final thing you want to establish is a tunnel with your Saleor environment. Go to your app's directory first and run:
 
 ```
 saleor app tunnel

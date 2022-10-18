@@ -1,4 +1,4 @@
-# How to configure Upstash for local development
+# How to configure Upstash
 
 ## Get credentials from Upstash
 
@@ -11,6 +11,7 @@ Create or login to [Upstash](https://upstash.com/). In your [console](https://co
 Create `.env.local` file with Upstash APL env variables.
 
 ```
-NEXT_PUBLIC_UPSTASH_TOKEN=
-NEXT_PUBLIC_UPSTASH_URL=
+APL_ENV=UpstashAPL
+UPSTASH_URL=<UPSTASH_REDIS_REST_URL>
+UPSTASH_TOKEN=<UPSTASH_REDIS_REST_TOKEN>
 ```
