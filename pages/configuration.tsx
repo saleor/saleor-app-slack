@@ -218,8 +218,6 @@ const ConfigurationWithAuth = withAuthorization({
   dashboardTokenInvalid: <AccessWarning cause="invalid_access_token" />,
 })(Configuration);
 
-// TODO: remove this ignore when https://github.com/saleor/saleor-app-sdk/pull/82 is released
-// @ts-ignore
 ConfigurationWithAuth.getLayout = (page: ReactElement) => (
   <div>
     <Card style={{ marginBottom: 40 }}>
