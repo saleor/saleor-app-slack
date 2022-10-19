@@ -9,7 +9,7 @@ import { APL, FileAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
  * [APL documentation](https://github.com/saleor/saleor-app-sdk/blob/main/docs/apl.md)
  */
 
-export let apl: APL;
+let apl: APL;
 switch (process.env.APL) {
   case "vercel":
     apl = new VercelAPL();
