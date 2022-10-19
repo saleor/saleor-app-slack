@@ -17,19 +17,11 @@ const handler = createManifestHandler({
       name: packageJson.name,
       tokenTargetUrl: `${context.appBaseUrl}/api/register`,
       appUrl: context.appBaseUrl,
-      permissions: ["MANAGE_ORDERS"],
+      permissions: [],
       id: "saleor.app",
       version: packageJson.version,
       webhooks,
-      extensions: [
-        {
-          label: "Guest orders",
-          mount: "NAVIGATION_ORDERS",
-          target: "APP_PAGE",
-          permissions: ["MANAGE_ORDERS"],
-          url: "/orders",
-        },
-      ],
+      extensions: [],
     };
 
     return manifest;
