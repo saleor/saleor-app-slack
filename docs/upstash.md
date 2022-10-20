@@ -11,7 +11,7 @@ Create or login to [Upstash](https://upstash.com/). In your [console](https://co
 Create `.env.local` file with Upstash APL env variables.
 
 ```
-APL_ENV=UpstashAPL
+APL=upstash
 UPSTASH_URL=<UPSTASH_REDIS_REST_URL>
 UPSTASH_TOKEN=<UPSTASH_REDIS_REST_TOKEN>
 ```
