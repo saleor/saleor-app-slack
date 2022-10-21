@@ -17,7 +17,7 @@ const handler = createManifestHandler({
       name: packageJson.name,
       tokenTargetUrl: `${context.appBaseUrl}/api/register`,
       appUrl: context.appBaseUrl,
-      permissions: [],
+      permissions: ["MANAGE_ORDERS"],
       id: "saleor.app",
       version: packageJson.version,
       webhooks,
