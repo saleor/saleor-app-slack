@@ -181,6 +181,7 @@ function Instructions() {
           `WEBHOOK_URL` field
         </ListItem>
         <ListItem>Save configuration</ListItem>
+        <ListItem>Create new order to test application</ListItem>
       </List>
       <Typography>Useful links</Typography>
       <List>
