@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   fieldContainer: {
     marginBottom: theme.spacing(2),
   },
+  additionalInfo: {
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 type PageProps = {
@@ -122,6 +125,10 @@ function Configuration({ isVercel, appReady }: PageProps) {
           <TextField label={key} name={key} fullWidth onChange={onChange} value={value} />
         </div>
       ))}
+      <p className={classes.additionalInfo}>
+        This webhook will be called when new order is created and `order_created` event is
+        triggered.
+      </p>
       <div>
         <ConfirmButton
           type="submit"
