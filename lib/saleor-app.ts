@@ -1,5 +1,5 @@
-import { SaleorApp } from "@saleor/app-sdk";
 import { APL, FileAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
+import { SaleorApp } from "@saleor/app-sdk/saleor-app";
 
 /**
  * By default auth data are stored in the `.auth-data.json` (FileAPL).
