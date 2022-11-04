@@ -2,7 +2,7 @@ import { createManifestHandler } from "@saleor/app-sdk/handlers/next";
 import { AppManifest } from "@saleor/app-sdk/types";
 import { withSentry } from "@sentry/nextjs";
 
-import packageJson from "../../package.json";
+import packageJson from "../../../package.json";
 import { orderCreatedWebhook } from "./webhooks/order-created";
 
 const handler = createManifestHandler({

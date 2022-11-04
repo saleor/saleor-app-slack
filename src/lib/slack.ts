@@ -1,4 +1,4 @@
-import { OrderCreatedWebhookPayloadFragment } from "../generated/graphql";
+import { OrderCreatedWebhookPayloadFragment } from "../../generated/graphql";
 
 export const sendSlackMessage = async (
   to: string,

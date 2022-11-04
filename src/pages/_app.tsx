@@ -5,9 +5,9 @@ import { AppBridge, AppBridgeProvider } from "@saleor/app-sdk/app-bridge";
 import { ThemeProvider as MacawUIThemeProvider } from "@saleor/macaw-ui";
 import React, { PropsWithChildren, useEffect } from "react";
 
+import { AppLayoutProps } from "../../types";
 import { ThemeSynchronizer } from "../hooks/theme-synchronizer";
 import GraphQLProvider from "../providers/GraphQLProvider";
-import { AppLayoutProps } from "../types";
 
 const themeOverrides: Partial<Theme> = {
   overrides: {

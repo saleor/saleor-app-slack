@@ -2,7 +2,7 @@ import { NextWebhookApiHandler, SaleorAsyncWebhook } from "@saleor/app-sdk/handl
 import { Response } from "retes/response";
 import { gql } from "urql";
 
-import { OrderCreatedWebhookPayloadFragment } from "../../../generated/graphql";
+import { OrderCreatedWebhookPayloadFragment } from "../../../../generated/graphql";
 import { getValue } from "../../../lib/metadata";
 import { saleorApp } from "../../../lib/saleor-app";
 import { sendSlackMessage } from "../../../lib/slack";
