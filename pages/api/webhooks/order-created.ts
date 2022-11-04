@@ -1,33 +1,85 @@
-import { SALEOR_DOMAIN_HEADER } from "@saleor/app-sdk/const";
-import {
-  withRegisteredSaleorDomainHeader,
-  withSaleorApp,
-  withSaleorEventMatch,
-  withWebhookSignatureVerified,
-} from "@saleor/app-sdk/middleware";
-import { withSentry } from "@sentry/nextjs";
-import { Handler } from "retes";
-import { toNextHandler } from "retes/adapter";
+import { NextWebhookApiHandler, SaleorAsyncWebhook } from "@saleor/app-sdk/handlers/next";
 import { Response } from "retes/response";
+import { gql } from "urql";
 
+import { OrderCreatedWebhookPayloadFragment } from "../../../generated/graphql";
 import { getValue } from "../../../lib/metadata";
 import { saleorApp } from "../../../lib/saleor-app";
 import { sendSlackMessage } from "../../../lib/slack";
 
-const handler: Handler = async (request) => {
-  const saleorDomain = request.headers[SALEOR_DOMAIN_HEADER] as string;
-  const webhookUrl = await getValue(saleorDomain, "WEBHOOK_URL");
+const OrderCreatedWebhookPayload = gql`
+  fragment OrderCreatedWebhookPayload on OrderCreated {
+    order {
+      id
+      number
+      user {
+        email
+        firstName
+        lastName
+      }
+      shippingAddress {
+        streetAddress1
+        city
+        postalCode
+        country {
+          country
+        }
+      }
+      subtotal {
+        gross {
+          amount
+          currency
+        }
+      }
+      shippingPrice {
+        gross {
+          amount
+          currency
+        }
+      }
+      total {
+        gross {
+          amount
+          currency
+        }
+      }
+    }
+  }
+`;
 
-  const context = request.params;
-  const { order } = context;
+const OrderCreatedGraphqlSubscription = gql`
+  ${OrderCreatedWebhookPayload}
+  subscription OrderCreated {
+    event {
+      ...OrderCreatedWebhookPayload
+    }
+  }
+`;
 
-  if (!order.id) {
-    return Response.BadRequest({ success: false, message: "No order id." });
+export const orderCreatedWebhook = new SaleorAsyncWebhook<OrderCreatedWebhookPayloadFragment>({
+  name: "Order Created in Saleor",
+  webhookPath: "api/webhooks/order-created",
+  asyncEvent: "ORDER_CREATED",
+  apl: saleorApp.apl,
+  subscriptionQueryAst: OrderCreatedGraphqlSubscription,
+});
+
+const handler: NextWebhookApiHandler<OrderCreatedWebhookPayloadFragment> = async (
+  req,
+  res,
+  context
+) => {
+  const { payload, authData } = context;
+
+  const webhookUrl = await getValue(authData.domain, "WEBHOOK_URL");
+
+  if (!payload.order) {
+    return Response.BadRequest({ success: false, message: "Order not found in request payload" });
   }
 
   const response = await sendSlackMessage(webhookUrl, {
-    saleorDomain,
-    order,
+    saleorDomain: authData.domain,
+    order: payload.order,
   });
 
   if (response.status !== 200) {
@@ -43,15 +95,7 @@ const handler: Handler = async (request) => {
   return Response.OK({ success: true, message: "Slack message sent!" });
 };
 
-export default withSentry(
-  toNextHandler([
-    withSaleorApp(saleorApp),
-    withRegisteredSaleorDomainHeader,
-    withSaleorEventMatch("order_created"),
-    withWebhookSignatureVerified(),
-    handler,
-  ])
-);
+export default orderCreatedWebhook.createHandler(handler);
 
 export const config = {
   api: {

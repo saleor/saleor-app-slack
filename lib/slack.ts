@@ -1,8 +1,11 @@
-import { Order } from "../generated/graphql";
+import { OrderCreatedWebhookPayloadFragment } from "../generated/graphql";
 
 export const sendSlackMessage = async (
   to: string,
-  data: { order: Order; saleorDomain: string }
+  data: {
+    order: Exclude<OrderCreatedWebhookPayloadFragment["order"], undefined | null>;
+    saleorDomain: string;
+  }
 ) => {
   const {
     saleorDomain,
