@@ -1,5 +1,4 @@
 import { NextWebhookApiHandler, SaleorAsyncWebhook } from "@saleor/app-sdk/handlers/next";
-import { Response } from "retes/response";
 import { gql } from "urql";
 
 import { OrderCreatedWebhookPayloadFragment } from "../../../../generated/graphql";
@@ -74,7 +73,7 @@ const handler: NextWebhookApiHandler<OrderCreatedWebhookPayloadFragment> = async
   const webhookUrl = await getValue(authData.domain, "WEBHOOK_URL");
 
   if (!payload.order) {
-    return Response.BadRequest({ success: false, message: "Order not found in request payload" });
+    return res.status(400).send({ success: false, message: "Order not found in request payload" });
   }
 
   const response = await sendSlackMessage(webhookUrl, {
@@ -86,13 +85,13 @@ const handler: NextWebhookApiHandler<OrderCreatedWebhookPayloadFragment> = async
     const errorMessage = await response.text();
     console.error(`Slack API responded with code ${response.status}: ${errorMessage}`);
 
-    return Response.InternalServerError({
+    return res.status(500).send({
       success: false,
       message: `Slack API responded with status ${response.status}. Message: ${errorMessage}`,
     });
   }
 
-  return Response.OK({ success: true, message: "Slack message sent!" });
+  return res.status(200).send({ success: true, message: "Slack message sent!" });
 };
 
 export default orderCreatedWebhook.createHandler(handler);
