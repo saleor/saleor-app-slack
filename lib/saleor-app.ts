@@ -1,6 +1,8 @@
 import { APL, FileAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
 import { SaleorApp } from "@saleor/app-sdk/saleor-app";
 
+import { RestApl } from "./rest-apl";
+
 /**
  * By default auth data are stored in the `.auth-data.json` (FileAPL).
  * For multi-tenant applications and deployments please use UpstashAPL.
@@ -18,6 +20,10 @@ switch (process.env.APL) {
     // Require `UPSTASH_URL` and `UPSTASH_TOKEN` environment variables
     apl = new UpstashAPL();
     break;
+  case "REST": {
+    apl = new RestApl();
+    break;
+  }
   default:
     apl = new FileAPL();
 }
