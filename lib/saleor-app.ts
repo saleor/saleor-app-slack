@@ -1,10 +1,8 @@
-import { APL, FileAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
+import { APL, FileAPL, RestAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
 import { SaleorApp } from "@saleor/app-sdk/saleor-app";
 
-import { RestApl } from "./rest-apl";
-
 /**
- * By default auth data are stored in the `.auth-data.json` (FileAPL).
+ * By default, auth data are stored in the `.auth-data.json` (FileAPL).
  * For multi-tenant applications and deployments please use UpstashAPL.
  *
  * To read more about storing auth data, read the
@@ -21,7 +19,12 @@ switch (process.env.APL) {
     apl = new UpstashAPL();
     break;
   case "REST": {
-    apl = new RestApl();
+    apl = new RestAPL({
+      resourceUrl: process.env.REST_APL_ENDPOINT as string,
+      headers: {
+        Authorization: `Bearer ${process.env.REST_APL_TOKEN as string}`,
+      },
+    });
     break;
   }
   default:
