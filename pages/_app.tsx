@@ -2,6 +2,7 @@ import "../styles/globals.css";
 
 import { Theme } from "@material-ui/core/styles";
 import { AppBridge, AppBridgeProvider } from "@saleor/app-sdk/app-bridge";
+import { RoutePropagator } from "@saleor/app-sdk/app-bridge/next";
 import { ThemeProvider as MacawUIThemeProvider } from "@saleor/macaw-ui";
 import React, { PropsWithChildren, useEffect } from "react";
 
@@ -51,6 +52,7 @@ function SaleorApp({ Component, pageProps }: AppLayoutProps) {
       <GraphQLProvider>
         <ThemeProvider overrides={themeOverrides} ssr>
           <ThemeSynchronizer />
+          <RoutePropagator />
           {getLayout(<Component {...pageProps} />)}
         </ThemeProvider>
       </GraphQLProvider>
