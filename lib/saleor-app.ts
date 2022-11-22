@@ -18,7 +18,11 @@ switch (process.env.APL) {
     // Require `UPSTASH_URL` and `UPSTASH_TOKEN` environment variables
     apl = new UpstashAPL();
     break;
-  case "REST": {
+  case "rest": {
+    if (!process.env.REST_APL_ENDPOINT || !process.env.REST_APL_TOKEN) {
+      throw new Error("Rest APL is not configured - missing env variables. Check saleor-app.ts");
+    }
+
     apl = new RestAPL({
       resourceUrl: process.env.REST_APL_ENDPOINT as string,
       headers: {
