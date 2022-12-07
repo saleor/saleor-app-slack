@@ -1,19 +1,12 @@
-import { AppManifest } from "@saleor/app-sdk/types";
 import { createManifestHandler } from "@saleor/app-sdk/handlers/next";
+import { AppManifest } from "@saleor/app-sdk/types";
 import { withSentry } from "@sentry/nextjs";
 
-import { inferWebhooks } from "@saleor/app-sdk/infer-webhooks";
-import * as GeneratedGraphQL from "../../generated/graphql";
-import packageJson from "../../package.json";
+import packageJson from "../../../package.json";
+import { orderCreatedWebhook } from "./webhooks/order-created";
 
 const handler = createManifestHandler({
   async manifestFactory(context) {
-    const webhooks = await inferWebhooks(
-      context.appBaseUrl,
-      `${__dirname}/webhooks`,
-      GeneratedGraphQL
-    );
-
     const manifest: AppManifest = {
       name: packageJson.name,
       tokenTargetUrl: `${context.appBaseUrl}/api/register`,
@@ -21,7 +14,7 @@ const handler = createManifestHandler({
       permissions: ["MANAGE_ORDERS"],
       id: "saleor.app",
       version: packageJson.version,
-      webhooks,
+      webhooks: [orderCreatedWebhook.getWebhookManifest(context.appBaseUrl)],
       extensions: [],
     };
 

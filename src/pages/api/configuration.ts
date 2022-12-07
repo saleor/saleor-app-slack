@@ -14,7 +14,7 @@ import {
   MetadataInput,
   MetadataItem,
   UpdateAppMetadataDocument,
-} from "../../generated/graphql";
+} from "../../../generated/graphql";
 import { createClient } from "../../lib/graphql";
 import { saleorApp } from "../../lib/saleor-app";
 import { getAppIdFromApi } from "../../lib/utils";
