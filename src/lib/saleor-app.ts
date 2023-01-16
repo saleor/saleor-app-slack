@@ -1,4 +1,4 @@
-import { APL, FileAPL, RestAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
+import { APL, FileAPL, SaleorCloudAPL, UpstashAPL, VercelAPL } from "@saleor/app-sdk/APL";
 import { SaleorApp } from "@saleor/app-sdk/saleor-app";
 
 /**
@@ -23,11 +23,9 @@ switch (process.env.APL) {
       throw new Error("Rest APL is not configured - missing env variables. Check saleor-app.ts");
     }
 
-    apl = new RestAPL({
+    apl = new SaleorCloudAPL({
       resourceUrl: process.env.REST_APL_ENDPOINT as string,
-      headers: {
-        Authorization: `Bearer ${process.env.REST_APL_TOKEN as string}`,
-      },
+      token: process.env.REST_APL_TOKEN as string,
     });
     break;
   }
