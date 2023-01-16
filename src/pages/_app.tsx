@@ -8,7 +8,6 @@ import React, { PropsWithChildren, useEffect } from "react";
 
 import { AppLayoutProps } from "../../types";
 import { ThemeSynchronizer } from "../hooks/theme-synchronizer";
-import GraphQLProvider from "../providers/GraphQLProvider";
 
 const themeOverrides: Partial<Theme> = {
   overrides: {
@@ -49,13 +48,11 @@ function SaleorApp({ Component, pageProps }: AppLayoutProps) {
 
   return (
     <AppBridgeProvider appBridgeInstance={appBridgeInstance}>
-      <GraphQLProvider>
-        <ThemeProvider overrides={themeOverrides} ssr>
-          <ThemeSynchronizer />
-          <RoutePropagator />
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-      </GraphQLProvider>
+      <ThemeProvider overrides={themeOverrides} ssr>
+        <ThemeSynchronizer />
+        <RoutePropagator />
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
     </AppBridgeProvider>
   );
 }
