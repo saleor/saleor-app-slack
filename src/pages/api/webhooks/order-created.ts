@@ -2,7 +2,8 @@ import { NextWebhookApiHandler, SaleorAsyncWebhook } from "@saleor/app-sdk/handl
 import { gql } from "urql";
 
 import { OrderCreatedWebhookPayloadFragment } from "../../../../generated/graphql";
-import { getValue } from "../../../lib/metadata";
+import { createClient } from "../../../lib/graphql";
+import { createSettingsManager } from "../../../lib/metadata";
 import { saleorApp } from "../../../lib/saleor-app";
 import { sendSlackMessage } from "../../../lib/slack";
 
@@ -70,7 +71,21 @@ const handler: NextWebhookApiHandler<OrderCreatedWebhookPayloadFragment> = async
 ) => {
   const { payload, authData } = context;
 
-  const webhookUrl = await getValue(authData.domain, "WEBHOOK_URL");
+  const { saleorApiUrl, token, appId } = authData;
+
+  const client = createClient(saleorApiUrl, async () => Promise.resolve({ token }));
+
+  const settings = createSettingsManager(client, appId);
+
+  const webhookUrl = await settings.get("WEBHOOK_URL");
+
+  if (!webhookUrl) {
+    return res.status(400).send({
+      success: false,
+      message:
+        "The application has not been configured yet - Missing webhook URL configuration value",
+    });
+  }
 
   if (!payload.order) {
     return res.status(400).send({ success: false, message: "Order not found in request payload" });

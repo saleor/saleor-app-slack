@@ -1,93 +1,57 @@
-import { SALEOR_DOMAIN_HEADER } from "@saleor/app-sdk/const";
-import {
-  withJWTVerified,
-  withRegisteredSaleorDomainHeader,
-  withSaleorApp,
-} from "@saleor/app-sdk/middleware";
-import { withSentry } from "@sentry/nextjs";
-import type { Handler } from "retes";
-import { toNextHandler } from "retes/adapter";
-import { Response } from "retes/response";
+import { createProtectedHandler, ProtectedHandlerContext } from "@saleor/app-sdk/handlers/next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-import {
-  FetchAppDetailsDocument,
-  MetadataInput,
-  MetadataItem,
-  UpdateAppMetadataDocument,
-} from "../../../generated/graphql";
 import { createClient } from "../../lib/graphql";
+import { createSettingsManager } from "../../lib/metadata";
 import { saleorApp } from "../../lib/saleor-app";
-import { getAppIdFromApi } from "../../lib/utils";
 
-const CONFIGURATION_KEYS = ["WEBHOOK_URL"];
+const WEBHOOK_URL = "WEBHOOK_URL";
 
-const prepareMetadataFromRequest = (input: MetadataInput[] | MetadataItem[]) =>
-  input
-    .filter(({ key }) => CONFIGURATION_KEYS.includes(key))
-    .map(({ key, value }) => ({ key, value }));
+interface PostRequestBody {
+  data: { key: string; value: string }[];
+}
 
-const prepareResponseFromMetadata = (input: MetadataItem[]) => {
-  const output: MetadataInput[] = [];
-  for (const configurationKey of CONFIGURATION_KEYS) {
-    output.push(
-      input.find(({ key }) => key === configurationKey) ?? {
-        key: configurationKey,
-        value: "",
-      }
-    );
-  }
-  return output.map(({ key, value }) => ({ key, value }));
-};
+export const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  ctx: ProtectedHandlerContext
+) => {
+  const {
+    authData: { token, saleorApiUrl, appId },
+  } = ctx;
 
-const handler: Handler = async (request) => {
-  const saleorDomain = request.headers[SALEOR_DOMAIN_HEADER] as string;
-  const authData = await saleorApp.apl.get(saleorDomain);
-  if (!authData) {
-    console.debug(`Could not find auth data for the domain ${saleorDomain}.`);
-    return Response.Forbidden();
-  }
+  const client = createClient(saleorApiUrl, async () => Promise.resolve({ token }));
 
-  const client = createClient(`https://${saleorDomain}/graphql/`, async () =>
-    Promise.resolve({ token: authData.token })
-  );
+  const settings = createSettingsManager(client, appId);
 
-  let privateMetadata;
-  switch (request.method!) {
+  switch (req.method!) {
     case "GET":
-      privateMetadata = (await client.query(FetchAppDetailsDocument, {}).toPromise()).data?.app
-        ?.privateMetadata!;
-
-      return Response.OK({
+      res.status(200).json({
         success: true,
-        data: prepareResponseFromMetadata(privateMetadata),
+        data: [{ key: WEBHOOK_URL, value: await settings.get(WEBHOOK_URL) }],
       });
+      return;
     case "POST": {
-      const appId = (await client.query(FetchAppDetailsDocument, {}).toPromise()).data?.app?.id;
-
-      privateMetadata = (
-        await client
-          .mutation(UpdateAppMetadataDocument, {
-            id: appId as string,
-            input: prepareMetadataFromRequest((request.body as any).data),
-          })
-          .toPromise()
-      ).data?.updatePrivateMetadata?.item?.privateMetadata!;
-
-      return Response.OK({
+      const reqBody = req.body as PostRequestBody;
+      const newWebhookUrl = (await reqBody.data?.find((entry) => entry.key === WEBHOOK_URL))?.value;
+      if (!newWebhookUrl) {
+        console.error("New value for the webhook URL has not been found");
+        res.status(400).json({
+          success: false,
+          message: "Wrong request body",
+        });
+        return;
+      }
+      await settings.set({ key: WEBHOOK_URL, value: newWebhookUrl });
+      res.status(200).json({
         success: true,
-        data: prepareResponseFromMetadata(privateMetadata),
+        data: [{ key: WEBHOOK_URL, value: await settings.get(WEBHOOK_URL) }],
       });
+      return;
     }
     default:
-      return Response.MethodNotAllowed();
+      res.status(405).end();
   }
 };
 
-export default withSentry(
-  toNextHandler([
-    withSaleorApp(saleorApp),
-    withRegisteredSaleorDomainHeader,
-    withJWTVerified(getAppIdFromApi),
-    handler,
-  ])
-);
+export default createProtectedHandler(handler, saleorApp.apl);

@@ -1,10 +1,6 @@
-import { withBaseURL } from "@saleor/app-sdk/middleware";
-import { withSentry } from "@sentry/nextjs";
-import type { Handler } from "retes";
-import { toNextHandler } from "retes/adapter";
-import { Response } from "retes/response";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const handler: Handler = () => {
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const manifest = {
     display_information: {
       name: "Saleor",
@@ -29,7 +25,7 @@ const handler: Handler = () => {
     },
   };
 
-  return Response.OK(manifest);
+  return res.status(200).json(manifest);
 };
 
-export default withSentry(toNextHandler([withBaseURL, handler]));
+export default handler;

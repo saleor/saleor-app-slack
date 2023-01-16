@@ -10,7 +10,7 @@ import {
 import Skeleton from "@material-ui/lab/Skeleton";
 import { AplReadyResult, VercelAPL } from "@saleor/app-sdk/APL";
 import { useAppBridge, withAuthorization } from "@saleor/app-sdk/app-bridge";
-import { SALEOR_AUTHORIZATION_BEARER_HEADER, SALEOR_DOMAIN_HEADER } from "@saleor/app-sdk/const";
+import { SALEOR_API_URL_HEADER, SALEOR_AUTHORIZATION_BEARER_HEADER } from "@saleor/app-sdk/const";
 import { ConfirmButton, ConfirmButtonTransitionState, makeStyles } from "@saleor/macaw-ui";
 import { GetServerSideProps } from "next";
 import { ChangeEvent, ReactElement, SyntheticEvent, useEffect, useState } from "react";
@@ -80,7 +80,7 @@ function Configuration({ isVercel, appReady }: PageProps) {
       method: "POST",
       headers: [
         ["content-type", "application/json"],
-        [SALEOR_DOMAIN_HEADER, appBridgeState?.domain!],
+        [SALEOR_API_URL_HEADER, appBridgeState?.saleorApiUrl!],
         [SALEOR_AUTHORIZATION_BEARER_HEADER, appBridgeState?.token!],
       ],
       body: JSON.stringify({ data: configuration }),
