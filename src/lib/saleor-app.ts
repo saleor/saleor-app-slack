@@ -33,6 +33,12 @@ switch (process.env.APL) {
     apl = new FileAPL();
 }
 
+/**
+ * Prohibit installation from Saleors other than specified by the regex.
+ * Regex source is ENV so if ENV is not set, all installations will be allowed.
+ */
+export const allowedUrlsPattern = process.env.ALLOWED_DOMAIN_PATTERN;
+
 export const saleorApp = new SaleorApp({
   apl,
 });
