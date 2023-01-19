@@ -14,7 +14,7 @@ function _ThemeSynchronizer() {
     if (themeType !== appBridgeState?.theme) {
       setTheme(appBridgeState.theme);
     }
-  }, [appBridgeState?.theme, setTheme]);
+  }, [appBridgeState?.theme, setTheme, themeType]);
 
   return null;
 }
