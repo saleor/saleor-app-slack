@@ -47,3 +47,4 @@ generated/
 
 # Sentry
 .sentryclirc
+sentry.properties
