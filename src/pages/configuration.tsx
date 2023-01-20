@@ -157,7 +157,6 @@ function Instructions() {
   slackUrl.searchParams.append("manifest_json", JSON.stringify(data));
 
   const openExternalUrl = (to: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     appBridge?.dispatch({
       type: "redirect",
       payload: {
