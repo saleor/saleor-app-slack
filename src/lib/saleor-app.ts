@@ -33,6 +33,15 @@ switch (process.env.APL) {
     apl = new FileAPL();
 }
 
+if (!process.env.SECRET_KEY && process.env.NODE_ENV === "production") {
+  throw new Error(
+    "For production deployment SECRET_KEY is mandatory to use EncryptedSettingsManager."
+  );
+}
+
+// Use placeholder value for the development
+export const settingsManagerSecretKey = process.env.SECRET_KEY || "CHANGE_ME";
+
 /**
  * Prohibit installation from Saleors other than specified by the regex.
  * Regex source is ENV so if ENV is not set, all installations will be allowed.
