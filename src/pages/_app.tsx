@@ -8,6 +8,7 @@ import React, { PropsWithChildren, useEffect } from "react";
 
 import { AppLayoutProps } from "../../types";
 import { ThemeSynchronizer } from "../hooks/theme-synchronizer";
+import { NoSSRWrapper } from "../lib/no-ssr-wrapper";
 
 const themeOverrides: Partial<Theme> = {
   overrides: {
@@ -48,13 +49,15 @@ function SaleorApp({ Component, pageProps }: AppLayoutProps) {
   }, []);
 
   return (
-    <AppBridgeProvider appBridgeInstance={appBridgeInstance}>
-      <ThemeProvider overrides={themeOverrides} ssr>
-        <ThemeSynchronizer />
-        <RoutePropagator />
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
-    </AppBridgeProvider>
+    <NoSSRWrapper>
+      <AppBridgeProvider appBridgeInstance={appBridgeInstance}>
+        <ThemeProvider overrides={themeOverrides} ssr>
+          <ThemeSynchronizer />
+          <RoutePropagator />
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </AppBridgeProvider>
+    </NoSSRWrapper>
   );
 }
 

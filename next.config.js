@@ -13,15 +13,6 @@ const moduleExports = {
     ignoreDuringBuilds: true,
   },
   reactStrictMode: true,
-  redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/configuration",
-        permanent: false,
-      },
-    ];
-  },
 
   sentry: {
     disableServerWebpackPlugin: !isSentryPropertiesInEnvironment,
