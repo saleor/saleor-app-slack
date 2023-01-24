@@ -20,6 +20,7 @@ import { ConfigurationError } from "../components/ConfigurationError/Configurati
 import useAppApi from "../hooks/useAppApi";
 import { saleorApp } from "../lib/saleor-app";
 import useDashboardNotifier from "../utils/useDashboardNotifier";
+import { Link } from "@material-ui/core";
 
 interface ConfigurationField {
   key: string;
@@ -172,7 +173,7 @@ function Instructions() {
       <Typography>How to configure</Typography>
       <List>
         <ListItem>
-          <a
+          <Link
             onClick={(e) => {
               e.preventDefault();
               openExternalUrl(slackUrl.href);
@@ -180,7 +181,7 @@ function Instructions() {
             href={slackUrl.href}
           >
             Install Slack application
-          </a>
+          </Link>
         </ListItem>
         <ListItem>
           Copy incoming Webhook URL from Slack app configuration and paste it below into
@@ -191,7 +192,7 @@ function Instructions() {
       <Typography>Useful links</Typography>
       <List>
         <ListItem>
-          <a
+          <Link
             onClick={(e) => {
               e.preventDefault();
               openExternalUrl("https://github.com/saleor/saleor-app-slack");
@@ -199,10 +200,10 @@ function Instructions() {
             href="https://github.com/saleor/saleor-app-slack"
           >
             Visit repository & readme
-          </a>
+          </Link>
         </ListItem>
         <ListItem>
-          <a
+          <Link
             onClick={(e) => {
               e.preventDefault();
               openExternalUrl("https://api.slack.com/messaging/webhooks");
@@ -210,7 +211,7 @@ function Instructions() {
             href="https://api.slack.com/messaging/webhooks"
           >
             Read about Slack apps that use incoming webhooks
-          </a>
+          </Link>
         </ListItem>
       </List>
     </>

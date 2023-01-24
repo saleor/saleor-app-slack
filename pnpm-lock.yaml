@@ -12,8 +12,8 @@ specifiers:
   '@material-ui/core': ^4.12.4
   '@material-ui/icons': ^4.11.3
   '@material-ui/lab': 4.0.0-alpha.61
-  '@saleor/app-sdk': 0.26.0
-  '@saleor/macaw-ui': ^0.6.3
+  '@saleor/app-sdk': 0.27.0
+  '@saleor/macaw-ui': ^0.7.2
   '@sentry/nextjs': ^7.30.0
   '@types/node': ^18.7.16
   '@types/react': ^18.0.19
@@ -46,13 +46,14 @@ specifiers:
   react-helmet: ^6.1.0
   typescript: 4.8.3
   urql: ^3.0.3
+  usehooks-ts: ^2.9.1
 
 dependencies:
   '@material-ui/core': 4.12.4_nylzxt5ale4dsv666zkb25cgtm
   '@material-ui/icons': 4.11.3_syzufrrnbgjhwvvotesawp6yai
   '@material-ui/lab': 4.0.0-alpha.61_syzufrrnbgjhwvvotesawp6yai
-  '@saleor/app-sdk': 0.26.0_c3hne4hwj64hb7tofigd3bvkji
-  '@saleor/macaw-ui': 0.6.3_3igskpsgnvdgn574z3phvz2joa
+  '@saleor/app-sdk': 0.27.0_c3hne4hwj64hb7tofigd3bvkji
+  '@saleor/macaw-ui': 0.7.2_3igskpsgnvdgn574z3phvz2joa
   '@sentry/nextjs': 7.30.0_next@12.3.0+react@18.2.0
   '@urql/exchange-auth': 1.0.0_graphql@16.5.0
   eslint-config-next: 12.3.4_irgkl5vooow2ydyo6aokmferha
@@ -64,6 +65,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-helmet: 6.1.0_react@18.2.0
   urql: 3.0.3_aez2jvt6lsvokp3l4ousdbdxf4
+  usehooks-ts: 2.9.1_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@graphql-codegen/cli': 2.7.0_siupcgn3wlvluhjnbpgmgner4m
@@ -743,6 +745,7 @@ packages:
 
   /@floating-ui/react-dom-interactions/0.5.0_nylzxt5ale4dsv666zkb25cgtm:
     resolution: {integrity: sha512-rfON7mkHjCeogd0BSXPa8GBp1TMxEytJQqGVlCouSUonJ4POqdHsqcxRnCh0yAaGVaL/nB/J1vq28V4RdoLszg==}
+    deprecated: Package renamed to @floating-ui/react
     dependencies:
       '@floating-ui/react-dom': 0.7.2_nylzxt5ale4dsv666zkb25cgtm
       aria-hidden: 1.1.3
@@ -1679,8 +1682,8 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: false
 
-  /@saleor/app-sdk/0.26.0_c3hne4hwj64hb7tofigd3bvkji:
-    resolution: {integrity: sha512-OdaWKpvgMBYY/O0RJdHqgyurZXsVJDe1De1n6rU+6Au8C7VusMLQWbjS0VVbV3UJsEKJmbKSgBUSXSD283a01g==}
+  /@saleor/app-sdk/0.27.0_c3hne4hwj64hb7tofigd3bvkji:
+    resolution: {integrity: sha512-2rNI3mL4EFjmGVNpEKqmpImAACCjP7mVCK8sJKf3W08smWzjqu6xw6pLpXdx8/Vhmn3IhkjUmB4IAc6XBFhslg==}
     peerDependencies:
       next: '>=12'
       react: '>=17'
@@ -1700,9 +1703,9 @@ packages:
       - supports-color
     dev: false
 
-  /@saleor/macaw-ui/0.6.3_3igskpsgnvdgn574z3phvz2joa:
-    resolution: {integrity: sha512-YJPSho+mQHaZsHZancLbWoHKoF0pNLuB1OeeUz/xFMVkMw3aq1WhRWBvEN3byeshGPw7v7jYTmCtNL22UciiJA==}
-    engines: {node: '>=10'}
+  /@saleor/macaw-ui/0.7.2_3igskpsgnvdgn574z3phvz2joa:
+    resolution: {integrity: sha512-Fli7fhTWuHu7q2CzxwTUpB4x9HYaxHSAzCLZLA23VY1ieIWbCxbsXadMiMGWp/nuYitswMr6JXMm+1SDe9K8LQ==}
+    engines: {node: '>=16 <19'}
     peerDependencies:
       '@material-ui/core': ^4.11.2
       '@material-ui/icons': ^4.11.2
@@ -1722,7 +1725,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-helmet: 6.1.0_react@18.2.0
-      react-inlinesvg: 2.3.0_react@18.2.0
+      react-inlinesvg: 3.0.1_react@18.2.0
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -5438,10 +5441,10 @@ packages:
       react-side-effect: 2.1.2_react@18.2.0
     dev: false
 
-  /react-inlinesvg/2.3.0_react@18.2.0:
-    resolution: {integrity: sha512-fEGOdDf4k4bcveArbEpj01pJcH8pOCKLxmSj2POFdGvEk5YK0NZVnH6BXpW/PzACHPRsuh1YKAhNZyFnD28oxg==}
+  /react-inlinesvg/3.0.1_react@18.2.0:
+    resolution: {integrity: sha512-cBfoyfseNI2PkDA7ZKIlDoHq0eMfpoC3DhKBQNC+/X1M4ZQB+aXW+YiNPUDDDKXUsGDUIZWWiZWNFeauDIVdoA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       exenv: 1.2.2
       react: 18.2.0
@@ -6230,6 +6233,17 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /usehooks-ts/2.9.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-2FAuSIGHlY+apM9FVlj8/oNhd+1y+Uwv5QNkMQz1oSfdHk4PXo1qoCw9I5M7j0vpH8CSWFJwXbVPeYDjLCx9PA==}
+    engines: {node: '>=16.15.0', npm: '>=8'}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /util-deprecate/1.0.2:
