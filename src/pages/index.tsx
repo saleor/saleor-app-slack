@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { FormEventHandler, useEffect } from "react";
 import { useIsMounted } from "usehooks-ts";
 import Image from "next/image";
-import SaleorLogoImage from "../assets/saleor-logo.svg";
+import SaleorLogoImage from "../assets/saleor-logo-dark.svg";
 import { InputAdornment, TextField, Typography } from "@material-ui/core";
 import { Button, makeStyles } from "@saleor/macaw-ui";
 
@@ -86,7 +86,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <div className={styles.root}>
-      <Image src={SaleorLogoImage} />
+      <Image width={200} src={SaleorLogoImage} />
       <Typography className={styles.headline} variant="h1">
         The Slack App has to be <br />
         launched in the Saleor Dashboard
