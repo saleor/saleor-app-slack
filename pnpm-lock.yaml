@@ -12,7 +12,7 @@ specifiers:
   '@material-ui/core': ^4.12.4
   '@material-ui/icons': ^4.11.3
   '@material-ui/lab': 4.0.0-alpha.61
-  '@saleor/app-sdk': 0.27.0
+  '@saleor/app-sdk': 0.27.1
   '@saleor/macaw-ui': ^0.7.2
   '@sentry/nextjs': ^7.30.0
   '@types/node': ^18.7.16
@@ -23,6 +23,7 @@ specifiers:
   '@urql/exchange-auth': ^1.0.0
   autoprefixer: ^10.4.7
   clean-publish: ^4.0.1
+  clsx: ^1.2.1
   eslint: ^8.23.1
   eslint-config-airbnb: ^19.0.4
   eslint-config-next: 13.1.4
@@ -52,10 +53,11 @@ dependencies:
   '@material-ui/core': 4.12.4_nylzxt5ale4dsv666zkb25cgtm
   '@material-ui/icons': 4.11.3_syzufrrnbgjhwvvotesawp6yai
   '@material-ui/lab': 4.0.0-alpha.61_syzufrrnbgjhwvvotesawp6yai
-  '@saleor/app-sdk': 0.27.0_s75y6mxmikaw2mhqmuko6w7njm
+  '@saleor/app-sdk': 0.27.1_s75y6mxmikaw2mhqmuko6w7njm
   '@saleor/macaw-ui': 0.7.2_3igskpsgnvdgn574z3phvz2joa
   '@sentry/nextjs': 7.30.0_next@13.1.0+react@18.2.0
   '@urql/exchange-auth': 1.0.0_graphql@16.5.0
+  clsx: 1.2.1
   eslint-config-next: 13.1.4_irgkl5vooow2ydyo6aokmferha
   graphql: 16.5.0
   graphql-tag: 2.12.6_graphql@16.5.0
@@ -1681,8 +1683,8 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: false
 
-  /@saleor/app-sdk/0.27.0_s75y6mxmikaw2mhqmuko6w7njm:
-    resolution: {integrity: sha512-2rNI3mL4EFjmGVNpEKqmpImAACCjP7mVCK8sJKf3W08smWzjqu6xw6pLpXdx8/Vhmn3IhkjUmB4IAc6XBFhslg==}
+  /@saleor/app-sdk/0.27.1_s75y6mxmikaw2mhqmuko6w7njm:
+    resolution: {integrity: sha512-ZNbucokKCdBE1qa+YLHvjBVazYcRuUExBdaPW9aNxfeYyXgQNCdHqJx9oA/S1lMEVSbZSIRcn8Sx1+X/eEV8BA==}
     peerDependencies:
       next: '>=12'
       react: '>=17'
