@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import React, { FormEventHandler, useEffect } from "react";
 import { useIsMounted } from "usehooks-ts";
 import Image from "next/image";
-import SaleorLogoImage from "../assets/saleor-logo-dark.svg";
-import { InputAdornment, TextField, Typography } from "@material-ui/core";
-import { Button, makeStyles } from "@saleor/macaw-ui";
+import SaleorLogoImage from "../assets/saleor-logo.svg";
+import SaleorLogoImageDark from "../assets/saleor-logo-dark.svg";
+import { InputAdornment, LinearProgress, TextField, Typography } from "@material-ui/core";
+import { Button, makeStyles, useTheme } from "@saleor/macaw-ui";
+import { isInIframe } from "../lib/is-in-iframe";
 
 const useStyles = makeStyles({
   root: {
@@ -61,6 +63,7 @@ const IndexPage: NextPage = () => {
   const { appBridgeState } = useAppBridge();
   const isMounted = useIsMounted();
   const { replace } = useRouter();
+  const { themeType } = useTheme();
 
   const onFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -84,9 +87,20 @@ const IndexPage: NextPage = () => {
     }
   }, [isMounted, appBridgeState?.ready]);
 
+  /**
+   * TODO Check also some timeout and show error if appBridge never handshakes
+   */
+  if (isInIframe()) {
+    return <LinearProgress />;
+  }
+
   return (
     <div className={styles.root}>
-      <Image alt="Saleor logo" width={200} src={SaleorLogoImage} />
+      <Image
+        alt="Saleor logo"
+        width={200}
+        src={themeType === "light" ? SaleorLogoImage : SaleorLogoImageDark}
+      />
       <Typography className={styles.headline} variant="h1">
         The Slack App has to be <br />
         launched in the Saleor Dashboard
