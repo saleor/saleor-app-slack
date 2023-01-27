@@ -86,7 +86,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <div className={styles.root}>
-      <Image width={200} src={SaleorLogoImage} />
+      <Image alt="Saleor logo" width={200} src={SaleorLogoImage} />
       <Typography className={styles.headline} variant="h1">
         The Slack App has to be <br />
         launched in the Saleor Dashboard
