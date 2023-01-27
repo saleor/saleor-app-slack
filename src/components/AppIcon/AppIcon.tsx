@@ -4,7 +4,7 @@ import appIcon from "./AppIcon.svg";
 
 const useStyles = makeStyles({
   appIconContainer: {
-    background: `rgb(227, 149, 60)`,
+    background: `rgb(95, 58, 199)`,
     padding: 10,
     borderRadius: "50%",
     width: 50,
