@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { FormEventHandler, useEffect } from "react";
 import { useIsMounted } from "usehooks-ts";
 import Image from "next/image";
-import SaleorLogoImage from "../assets/saleor-logo-dark.svg";
+import SaleorLogoImage from "../assets/saleor-logo.svg";
 import { InputAdornment, TextField, Typography } from "@material-ui/core";
 import { Button, makeStyles } from "@saleor/macaw-ui";
 
