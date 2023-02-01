@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    borderBottom: `1px solid ${theme.palette.grey[theme.palette.type === "light" ? 100 : 700]}`,
   },
   leftColumn: {
     marginRight: "auto",
